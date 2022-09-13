@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    private float speed = 2f;
-
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float jmpForce = 100f;
+    [SerializeField] private Rigidbody characterBody;
     void Update()
     {
         if(Input.GetAxis("Horizontal") != 0){
@@ -17,11 +18,12 @@ public class CharacterController : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.Space)){
-            ToggleVisibility();
+            jump();
         }
     }
 
-    private void ToggleVisibility(){
-        gameObject.SetActive(!gameObject.activeInHierarchy);
+    private void jump(){
+        characterBody.AddForce(Vector3.up * jmpForce);
+        //characterBody.velocity = Vector3.up * 10f;
     }
 }
