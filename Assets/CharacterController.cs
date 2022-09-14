@@ -23,7 +23,15 @@ public class CharacterController : MonoBehaviour
     }
 
     private void jump(){
-        characterBody.AddForce(Vector3.up * jmpForce);
-        //characterBody.velocity = Vector3.up * 10f;
+        if(IsTouchingFloor()){
+            characterBody.AddForce(Vector3.up * jmpForce);
+            //characterBody.velocity = Vector3.up * 10f;
+        }
+
+    }
+
+    private bool IsTouchingFloor(){
+        RaycastHit hit;
+        return Physics.SphereCast(transform.position, 0.15f, -transform.up, out hit, 1f);
     }
 }
